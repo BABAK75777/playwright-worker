@@ -4,17 +4,27 @@ from bs4 import BeautifulSoup
 
 app = FastAPI()
 
+
 @app.get("/")
 def root():
     return {"status": "ok"}
+
 
 @app.get("/search")
 def search(q: str = Query(..., description="Search query")):
     url = "https://duckduckgo.com/html/"
     params = {"q": q}
 
-    resp = httpx.get(url, params=params, timeout=15.0)
-    resp.raise_for_status()
+    try:
+        resp = httpx.get(url, params=params, timeout=15.0)
+        resp.raise_for_status()
+    except Exception as e:
+        # هر خطایی بیفته، اینجا می‌آد
+        return {
+            "query": q,
+            "results": [],
+            "error": str(e),
+        }
 
     soup = BeautifulSoup(resp.text, "html.parser")
     results = []
