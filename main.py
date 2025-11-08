@@ -16,7 +16,7 @@ def search(q: str = Query(..., description="Search query")):
     params = {"q": q}
 
     try:
-        resp = resp = httpx.get(
+        resp = httpx.get(
     url,
     params=params,
     timeout=15.0,
