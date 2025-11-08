@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Query
 import httpx
+from urllib.parse import urlparse, parse_qs, unquote
 from bs4 import BeautifulSoup
 
 app = FastAPI()
