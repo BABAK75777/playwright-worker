@@ -19,7 +19,6 @@ def search(q: str = Query(..., description="Search query")):
         resp = httpx.get(url, params=params, timeout=15.0)
         resp.raise_for_status()
     except Exception as e:
-        # هر خطایی بیفته، اینجا می‌آد
         return {
             "query": q,
             "results": [],
