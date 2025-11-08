@@ -17,12 +17,11 @@ def search(q: str = Query(..., description="Search query")):
 
     try:
         resp = httpx.get(
-    url,
-    params=params,
-    timeout=15.0,
-    follow_redirects=True,
-)
-
+            url,
+            params=params,
+            timeout=15.0,
+            follow_redirects=True,
+        )
         resp.raise_for_status()
     except Exception as e:
         return {
